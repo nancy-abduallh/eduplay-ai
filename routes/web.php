@@ -15,25 +15,27 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect(LaravelLocalization::getLocalizedURL($locale));
 })->name('locale.set');
 
-Route::group([
-    'prefix' => LaravelLocalization::setLocale(), // automatically adds /en or /ar
-    'middleware' => [
-        'web',
-        'localeSessionRedirect',
-        'localizationRedirect',
-        'localeViewPath'
-    ]
-], function () {
-    // Home page
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-    // Fetch endpoints
-    Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
-    Route::get('/fetch/progress/{session}', [FetchController::class, 'progress'])->name('fetch.progress');
-    Route::get('/fetch/status/{session}', [FetchController::class, 'status'])->name('fetch.status');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(), 
+        'middleware' => [
+            'web', 
+            'localeSessionRedirect', 
+            'localizationRedirect', 
+            'localeViewPath'
+        ]
+    ],
+    function () {
 
-    // Courses
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+        Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+
+        // Fetch routes
+        Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
+        Route::get('/fetch/progress/{session}', [FetchController::class, 'progress'])->name('fetch.progress');
+        Route::get('/fetch/status/{session}', [FetchController::class, 'status'])->name('fetch.status');
 });
 
