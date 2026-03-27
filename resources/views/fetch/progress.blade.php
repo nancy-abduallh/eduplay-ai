@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Fetching Courses')
+@section('title', __('messages.fetching_courses'))
 
 @section('content')
 
@@ -11,10 +11,13 @@
                 <div class="spinner-core"><i class="fas fa-robot"></i></div>
             </div>
 
-            <h2 class="prog-title" id="progTitle">Fetching Courses</h2>
+            <h2 class="prog-title" id="progTitle">{{ __('messages.fetching_courses') }}</h2>
             <p class="prog-sub" id="progSub">
-                Processing <strong id="processedCount">0</strong> of
-                <strong>{{ $session->total_categories }}</strong> categories...
+                {!! sprintf(
+                    __('messages.processing_categories'),
+                    '<strong id="processedCount">0</strong>',
+                    '<strong>' . e($session->total_categories) . '</strong>',
+                ) !!}
             </p>
 
             <div class="prog-bar-bg">
@@ -25,17 +28,17 @@
             <div class="stats-row">
                 <div class="stat-tile">
                     <div class="stat-num" id="statProcessed">{{ $session->processed_categories }}</div>
-                    <div class="stat-lbl">Processed</div>
+                    <div class="stat-lbl">{{ __('messages.processed') }}</div>
                 </div>
                 <div class="stat-tile">
                     <div class="stat-num" id="statFound">{{ $session->total_found }}</div>
-                    <div class="stat-lbl">Playlists Found</div>
+                    <div class="stat-lbl">{{ __('messages.playlists_found') }}</div>
                 </div>
             </div>
 
             <div
                 style="font-size:0.73rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray-3);margin-bottom:0.5rem;">
-                <i class="fas fa-layer-group me-1"></i> Categories
+                <i class="fas fa-layer-group me-1"></i> {{ __('messages.categories_label') }}
             </div>
             <div class="cat-list" id="catList">
                 @foreach ($session->categories as $index => $cat)
@@ -49,7 +52,7 @@
             <div class="done-banner" id="doneBanner">
                 <i class="fas fa-circle-check" style="color:#22C55E;font-size:1.1rem;"></i>
                 <div>
-                    <strong>All done!</strong> Redirecting you to the course library...
+                    <strong>{{ __('messages.all_done') }}</strong> {{ __('messages.redirecting') }}
                 </div>
             </div>
 
@@ -100,9 +103,13 @@
                         clearInterval(pollInterval);
                         document.getElementById('spinnerWrap').innerHTML =
                             '<div style="width:80px;height:80px;margin:0 auto;background:rgba(34,197,94,0.12);border:2px solid rgba(34,197,94,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#22C55E;"><i class="fas fa-check"></i></div>';
-                        document.getElementById('progTitle').textContent = 'Fetch Complete!';
-                        document.getElementById('progSub').innerHTML = 'Found <strong>' + data.found +
-                            '</strong> unique playlists across all categories.';
+                        document.getElementById('progTitle').textContent = '{{ __('messages.fetch_complete') }}';
+
+                        // Correct way: Use a placeholder and replace it with the actual number
+                        const message = '{{ __('messages.found_playlists', ['found' => 'PLACEHOLDER']) }}'.replace(
+                            'PLACEHOLDER', data.found);
+                        document.getElementById('progSub').innerHTML = message;
+
                         document.getElementById('doneBanner').classList.add('show');
                         for (let i = 0; i < totalCats; i++) {
                             const dot = document.getElementById('dot-' + i);

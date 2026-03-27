@@ -40,7 +40,7 @@
                         <div class="mb-4">
                             <div class="sec-heading">
                                 <div class="bar"></div>
-                                <h2>About This Playlist</h2>
+                                <h2>{{ __('messages.about_this_playlist') }}</h2>
                                 <div class="rule"></div>
                             </div>
                             <p style="color:var(--gray-2);font-size:0.92rem;line-height:1.85;">
@@ -52,13 +52,13 @@
                     <div class="detail-block">
                         <div class="detail-block-header">
                             <i class="fas fa-circle-info"></i>
-                            Playlist Details
+                            {{ __('messages.playlist_details') }}
                         </div>
                         <div class="detail-block-body">
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="d-item">
-                                        <div class="d-lbl">Playlist ID</div>
+                                        <div class="d-lbl">{{ __('messages.playlist_id') }}</div>
                                         <div class="d-val"
                                             style="font-family:monospace;font-size:0.8rem;word-break:break-all;color:var(--red-bright);">
                                             {{ $course->playlist_id }}</div>
@@ -66,19 +66,19 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="d-item">
-                                        <div class="d-lbl">Channel</div>
+                                        <div class="d-lbl">{{ __('messages.channel') }}</div>
                                         <div class="d-val">{{ $course->channel_name }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="d-item">
-                                        <div class="d-lbl">Category</div>
+                                        <div class="d-lbl">{{ __('messages.category') }}</div>
                                         <div class="d-val">{{ $course->category }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="d-item">
-                                        <div class="d-lbl">Added</div>
+                                        <div class="d-lbl">{{ __('messages.added') }}</div>
                                         <div class="d-val">{{ $course->created_at->format('F j, Y') }}</div>
                                     </div>
                                 </div>
@@ -95,20 +95,20 @@
 
                         <a href="{{ $course->youtube_url }}" target="_blank" rel="noopener" class="watch-now">
                             <i class="fab fa-youtube"></i>
-                            Watch on YouTube
+                            {{ __('messages.watch_on_youtube') }}
                         </a>
 
                         <a href="{{ route('courses.index', ['category' => $course->category]) }}"
                             class="btn-ghost-red w-100 justify-content-center" style="display:flex;">
                             <i class="fas fa-layer-group"></i>
-                            More {{ $course->category }} Courses
+                            {{ __('messages.more_courses', ['category' => $course->category]) }}
                         </a>
 
                         <div
                             style="margin-top:1.2rem;padding:1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);text-align:center;">
                             <div
                                 style="font-size:0.72rem;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:0.5rem;">
-                                Platform</div>
+                                {{ __('messages.platform') }}</div>
                             <div
                                 style="display:flex;align-items:center;justify-content:center;gap:8px;color:var(--red-bright);font-weight:700;">
                                 <i class="fab fa-youtube fa-lg"></i> YouTube Playlist
@@ -123,7 +123,7 @@
                 <div class="mt-5 pt-4" style="border-top:1px solid var(--border);">
                     <div class="sec-heading">
                         <div class="bar"></div>
-                        <h2>Related Courses</h2>
+                        <h2>{{ __('messages.related_courses') }}</h2>
                         <div class="rule"></div>
                     </div>
                     <div class="row g-4">

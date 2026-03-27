@@ -1197,3 +1197,59 @@ body.light-mode .navbar-toggler-icon {
     letter-spacing: 0.5px;
 }
 
+/* RTL Overrides */
+html[dir="rtl"] .navbar-brand {
+    margin-right: 0;
+    margin-left: auto;
+}
+html[dir="rtl"] .navbar-nav.ms-auto {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+html[dir="rtl"] .nav-link i {
+    margin-left: 6px;
+    margin-right: 0;
+}
+html[dir="rtl"] .search-box i {
+    left: auto;
+    right: 0.9rem;
+}
+html[dir="rtl"] .search-in {
+    padding-left: 1rem;
+    padding-right: 2.3rem;
+}
+html[dir="rtl"] .arrow-link i {
+    transform: scaleX(-1);
+}
+html[dir="rtl"] .btn-red i,
+html[dir="rtl"] .btn-ghost-red i {
+    margin-left: 5px;
+    margin-right: 0;
+}
+html[dir="rtl"] .sec-heading .bar {
+    margin-right: 0;
+    margin-left: 12px;
+}
+html[dir="rtl"] .c-foot .arrow-link i {
+    transform: rotate(180deg);
+}
+html[dir="rtl"] .footer .text-md-end {
+    text-align: left !important;
+}
+html[dir="rtl"] .sidebar {
+    left: auto;
+    right: -300px;
+    border-right: none;
+    border-left: 1px solid var(--border);
+}
+html[dir="rtl"] .sidebar.active {
+    left: auto;
+    right: 0;
+}
+html[dir="rtl"] .sidebar-close {
+    right: auto;
+    left: 1rem;
+}
+html[dir="rtl"] .sidebar-nav .nav-link:hover .right-arrow {
+    transform: translateX(-4px);
+}

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Browse Courses')
+@section('title', __('messages.course_library'))
 
 @section('content')
 
@@ -9,13 +9,13 @@
             <div class="d-flex flex-wrap align-items-start justify-content-between gap-3">
                 <div>
                     <h1 class="pg-title">
-                        Course Library
+                        {{ __('messages.course_library') }}
                         <span class="cnt-badge">{{ number_format($filteredTotal) }}</span>
                     </h1>
-                    <p class="pg-sub">Browse AI-curated educational playlists from YouTube</p>
+                    <p class="pg-sub">{{ __('messages.browse_ai_curated') }}</p>
                 </div>
                 <a href="{{ route('home') }}" class="btn-red" style="align-self:flex-end;">
-                    <i class="fas fa-plus"></i> Fetch More
+                    <i class="fas fa-plus"></i> {{ __('messages.fetch_more') }}
                 </a>
             </div>
         </div>
@@ -28,8 +28,9 @@
                     <form method="GET" action="{{ route('courses.index') }}" id="filterForm">
                         <div class="search-box">
                             <i class="fas fa-magnifying-glass"></i>
-                            <input type="text" name="search" class="search-in" placeholder="Search courses, channels..."
-                                value="{{ request('search') }}" onchange="document.getElementById('filterForm').submit()">
+                            <input type="text" name="search" class="search-in"
+                                placeholder="{{ __('messages.search_courses_channels') }}" value="{{ request('search') }}"
+                                onchange="document.getElementById('filterForm').submit()">
                             @if (request('category'))
                                 <input type="hidden" name="category" value="{{ request('category') }}">
                             @endif
@@ -40,7 +41,7 @@
                     <div class="pill-row">
                         <a href="{{ route('courses.index', array_filter(['search' => request('search')])) }}"
                             class="c-pill {{ !request('category') ? 'active' : '' }}">
-                            <i class="fas fa-grip"></i> All
+                            <i class="fas fa-grip"></i> {{ __('messages.all') }}
                         </a>
                         @foreach ($categories as $cat)
                             <a href="{{ route('courses.index', array_filter(['category' => $cat, 'search' => request('search')])) }}"
@@ -58,21 +59,21 @@
         @if ($courses->isEmpty())
             <div class="empty-state">
                 <div class="empty-icon"><i class="fas fa-graduation-cap"></i></div>
-                <h3 class="empty-title">No courses found</h3>
+                <h3 class="empty-title">{{ __('messages.no_courses_found') }}</h3>
                 <p class="empty-sub">
                     @if (request('search') || request('category'))
-                        Try adjusting your filters or search query.
+                        {{ __('messages.try_adjusting_filters') }}
                     @else
-                        Start by fetching courses from the home page.
+                        {{ __('messages.start_by_fetching') }}
                     @endif
                 </p>
                 @if (request('search') || request('category'))
                     <a href="{{ route('courses.index') }}" class="btn-ghost-red">
-                        <i class="fas fa-xmark"></i> Clear Filters
+                        <i class="fas fa-xmark"></i> {{ __('messages.clear_filters') }}
                     </a>
                 @else
                     <a href="{{ route('home') }}" class="btn-red">
-                        <i class="fas fa-rocket"></i> Start Fetching
+                        <i class="fas fa-rocket"></i> {{ __('messages.start_fetching') }}
                     </a>
                 @endif
             </div>

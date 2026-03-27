@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'EduPlayAI') — AI-Powered Educational Playlists</title>
+    <title>@yield('title', __('messages.app_name')) — AI-Powered Educational Playlists</title>
     <meta name="description"
         content="Discover thousands of educational YouTube playlists curated by AI across every subject.">
 
@@ -25,6 +25,147 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('styles')
 
+    {{-- RTL support --}}
+    @if (app()->getLocale() == 'ar')
+        <style>
+            /* Override Bootstrap grid for RTL */
+            .row {
+                direction: rtl;
+            }
+
+            .pagination .page-link i {
+                transform: scaleX(-1);
+                display: inline-block;
+            }
+
+            .col-1,
+            .col-2,
+            .col-3,
+            .col-4,
+            .col-5,
+            .col-6,
+            .col-7,
+            .col-8,
+            .col-9,
+            .col-10,
+            .col-11,
+            .col-12,
+            .col-sm-1,
+            .col-sm-2,
+            .col-sm-3,
+            .col-sm-4,
+            .col-sm-5,
+            .col-sm-6,
+            .col-sm-7,
+            .col-sm-8,
+            .col-sm-9,
+            .col-sm-10,
+            .col-sm-11,
+            .col-sm-12,
+            .col-md-1,
+            .col-md-2,
+            .col-md-3,
+            .col-md-4,
+            .col-md-5,
+            .col-md-6,
+            .col-md-7,
+            .col-md-8,
+            .col-md-9,
+            .col-md-10,
+            .col-md-11,
+            .col-md-12,
+            .col-lg-1,
+            .col-lg-2,
+            .col-lg-3,
+            .col-lg-4,
+            .col-lg-5,
+            .col-lg-6,
+            .col-lg-7,
+            .col-lg-8,
+            .col-lg-9,
+            .col-lg-10,
+            .col-lg-11,
+            .col-lg-12 {
+                float: right;
+            }
+
+            .navbar-nav {
+                padding-right: 0;
+            }
+
+            .navbar-nav .nav-link i {
+                margin-left: 6px;
+                margin-right: 0;
+            }
+
+            .search-box i {
+                left: auto;
+                right: 0.9rem;
+            }
+
+            .search-in {
+                padding-left: 1rem;
+                padding-right: 2.3rem;
+            }
+
+            .pill-row {
+                flex-direction: row-reverse;
+                justify-content: flex-start;
+            }
+
+            .c-pill i {
+                margin-left: 5px;
+                margin-right: 0;
+            }
+
+            .arrow-link i {
+                transform: scaleX(-1);
+            }
+
+            .btn-start i,
+            .btn-red i,
+            .btn-ghost-red i {
+                margin-left: 8px;
+                margin-right: 0;
+            }
+
+            .c-badge,
+            .cnt-badge {
+                margin-left: 6px;
+                margin-right: 0;
+            }
+
+            .c-channel i {
+                margin-left: 5px;
+                margin-right: 0;
+            }
+
+            .sec-heading .bar {
+                margin-left: 12px;
+                margin-right: 0;
+            }
+
+            .detail-block-header i {
+                margin-left: 7px;
+                margin-right: 0;
+            }
+
+            .watch-now i {
+                margin-left: 8px;
+                margin-right: 0;
+            }
+
+            footer .text-md-end {
+                text-align: left !important;
+            }
+
+            .foot-tag i {
+                margin-left: 5px;
+                margin-right: 0;
+            }
+        </style>
+    @endif
+
     <style>
         /* ===== SCROLL PROGRESS BAR ===== */
         #scrollProgress {
@@ -40,7 +181,6 @@
         }
 
         /* ===== PROFESSIONAL SCROLLBAR STYLES ===== */
-        /* Webkit (Chrome, Safari, Edge) */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -61,13 +201,11 @@
             background: var(--red-bright);
         }
 
-        /* Firefox */
         * {
             scrollbar-width: thin;
             scrollbar-color: var(--red) var(--bg-2);
         }
 
-        /* For better visibility in light mode */
         body.light-mode ::-webkit-scrollbar-track {
             background: #e9ecef;
         }
@@ -80,7 +218,6 @@
             scrollbar-color: var(--red) #e9ecef;
         }
 
-        /* ===== EXISTING SIDEBAR & OVERLAY STYLES (unchanged) ===== */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -252,6 +389,11 @@
         body.light-mode .sidebar-close:hover {
             color: var(--red-bright);
         }
+
+        body[dir="rtl"] .navbar-brand {
+            direction: ltr;
+            unicode-bidi: embed;
+        }
     </style>
 </head>
 
@@ -265,9 +407,15 @@
 
     <nav class="navbar navbar-expand-lg" id="mainNav">
         <div class="container">
+
             <a class="navbar-brand" href="{{ route('home') }}">
-                <div class="logo-mark"><i class="fab fa-youtube"></i></div>
-                EduPlay<span class="brand-ai">AI</span>
+                @if (app()->getLocale() === 'en')
+                    <div class="logo-mark"><i class="fab fa-youtube"></i></div>
+                    EduPlay<span class="brand-ai">AI</span>
+                @else
+                    <div class="logo-mark"><i class="fab fa-youtube"></i></div>
+                    <span class="brand-ai">AI</span>EduPlay
+                @endif
             </a>
             <button class="navbar-toggler" type="button" id="mobileMenuToggle">
                 <span class="navbar-toggler-icon"></span>
@@ -276,19 +424,32 @@
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="fas fa-house"></i> Home
+                            <i class="fas fa-house"></i> {{ __('messages.home') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}"
                             href="{{ route('courses.index') }}">
-                            <i class="fas fa-graduation-cap"></i> Courses
+                            <i class="fas fa-graduation-cap"></i> {{ __('messages.courses') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <button id="themeToggle" class="nav-link" style="background: none; border: none;">
                             <i class="fas fa-moon"></i>
                         </button>
+                    </li>
+                    {{-- Language Switcher --}}
+                    <li class="nav-item dropdown">
+                        <button class="nav-link dropdown-toggle" id="langDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-globe"></i> {{ strtoupper(app()->getLocale()) }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+                            <li><a class="dropdown-item"
+                                    href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -301,43 +462,75 @@
         <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
         <div class="sidebar-header">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <div class="logo-mark"><i class="fab fa-youtube"></i></div>
-                EduPlay<span class="brand-ai">AI</span>
+                @if (app()->getLocale() === 'en')
+                    <div class="logo-mark"><i class="fab fa-youtube"></i></div>
+                    EduPlay<span class="brand-ai">AI</span>
+                @else
+                    <div class="logo-mark"><i class="fab fa-youtube"></i></div>
+                    <span class="brand-ai">AI</span>EduPlay
+                @endif
             </a>
         </div>
         <ul class="sidebar-nav">
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
                     <span class="nav-link-content">
-                        <i class="fas fa-house"></i> Home
+                        <i class="fas fa-house"></i> {{ __('messages.home') }}
                     </span>
-                    <i class="fas fa-arrow-right right-arrow"></i>
+
+                    @if (app()->getLocale() === 'en')
+                        <i class="fas fa-arrow-right right-arrow"></i>
+                    @else
+                        <i class="fas fa-arrow-left right-arrow"></i>
+                    @endif
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}"
                     href="{{ route('courses.index') }}">
                     <span class="nav-link-content">
-                        <i class="fas fa-graduation-cap"></i> Courses
+                        <i class="fas fa-graduation-cap"></i> {{ __('messages.courses') }}
                     </span>
-                    <i class="fas fa-arrow-right right-arrow"></i>
+                    @if (app()->getLocale() === 'en')
+                        <i class="fas fa-arrow-right right-arrow"></i>
+                    @else
+                        <i class="fas fa-arrow-left right-arrow"></i>
+                    @endif
                 </a>
             </li>
             <li class="nav-item">
                 <button id="themeToggleSidebar" class="nav-link">
                     <span class="nav-link-content">
-                        <i class="fas fa-moon"></i> Theme
+                        <i class="fas fa-moon"></i> {{ __('messages.theme') }}
                     </span>
-                    <i class="fas fa-arrow-right right-arrow"></i>
+                    @if (app()->getLocale() === 'en')
+                        <i class="fas fa-arrow-right right-arrow"></i>
+                    @else
+                        <i class="fas fa-arrow-left right-arrow"></i>
+                    @endif
                 </button>
+            </li>
+            {{-- Language Switcher in Sidebar --}}
+            <li class="nav-item">
+                <div class="nav-link" style="justify-content: space-between;">
+                    <span class="nav-link-content">
+                        <i class="fas fa-globe"></i> {{ __('messages.language') ?? 'Language' }}
+                    </span>
+                    <div class="d-flex gap-2">
+                        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"
+                            class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">EN</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"
+                            class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">AR</a>
+                    </div>
+                </div>
             </li>
         </ul>
         <div class="sidebar-footer">
             <div class="footer-powered">
-                <i class="fas fa-bolt"></i> Powered by Gemini + YouTube Data API
+                <i class="fas fa-bolt"></i> {{ __('messages.powered_by') }}
             </div>
             <div class="footer-copyright">
-                &copy; {{ date('Y') }} EduPlayAI — All rights reserved.
+                &copy; {{ date('Y') }} EduPlayAI — {{ __('messages.copyright') }}
             </div>
         </div>
     </div>
@@ -349,29 +542,34 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="foot-brand">
-                        <div class="logo-mark"><i class="fab fa-youtube"></i></div>
-                        EduPlay<span class="brand-ai">AI</span>
+                        @if (app()->getLocale() === 'en')
+                            <div class="logo-mark"><i class="fab fa-youtube"></i></div>
+                            EduPlay<span class="brand-ai">AI</span>
+                        @else
+                            <div class="logo-mark"><i class="fab fa-youtube"></i></div>
+                            <span class="brand-ai">AI</span>EduPlay
+                        @endif
                     </div>
-                    <p class="foot-text">AI-powered discovery of the world's best educational playlists.</p>
+                    <p class="foot-text">{{ __('messages.ai_powered_course_discovery') }}</p>
                 </div>
                 <div class="col-md-6 text-md-end mt-3 mt-md-0">
                     <a href="{{ route('home') }}" class="btn-ghost-red btn-sm"
                         style="font-size:0.8rem;padding:0.45rem 1rem;">
-                        <i class="fas fa-rocket"></i> Start Fetching
+                        <i class="fas fa-rocket"></i> {{ __('messages.start_fetching') }}
                     </a>
                 </div>
             </div>
             <div class="foot-divider"></div>
             <div class="foot-bottom">
                 <span class="foot-copy">
-                    &copy; {{ date('Y') }} EduPlayAI. All rights reserved.
-                    Created by
+                    &copy; {{ date('Y') }} EduPlayAI. {{ __('messages.copyright') }}
+                    {{ __('messages.created_by') }}
                     <a href="https://nancy-abduallh.github.io/My-Portfolio/" target="_blank" rel="noopener">
                         Nancy Abdullah
                     </a>
                 </span>
                 <span class="foot-tag">
-                    <i class="fas fa-bolt"></i> Powered by Gemini + YouTube Data API
+                    <i class="fas fa-bolt"></i> {{ __('messages.powered_by') }}
                 </span>
             </div>
         </div>
