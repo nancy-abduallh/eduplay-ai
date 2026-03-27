@@ -21,7 +21,9 @@ cp .env.example .env
 Edit `.env` and set:
 \`\`\`
 OPENAI_API_KEY=your_key_here
+
 YOUTUBE_API_KEY=your_key_here
+
 DB_DATABASE=eduplay_ai
 DB_USERNAME=root
 DB_PASSWORD=
