@@ -23,7 +23,6 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [
         'web',
-        'localize',
         'localeSessionRedirect',
         'localizationRedirect',
         'localeViewPath'
