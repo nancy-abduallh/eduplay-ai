@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+LaravelLocalization::setLocale();
+
 Route::get('locale/{locale}', function ($locale) {
     if (!in_array($locale, ['en', 'ar'])) {
         abort(400);
