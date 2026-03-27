@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FetchController;
 use App\Http\Controllers\HomeController;
@@ -12,30 +13,27 @@ Route::get('locale/{locale}', function ($locale) {
 
     session(['locale' => $locale]);
 
-    return redirect(LaravelLocalization::getLocalizedURL($locale));
+    return redirect()->to(
+        LaravelLocalization::getLocalizedURL($locale, null, [], true)
+    );
 })->name('locale.set');
 
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [
+        'web',
+        'localize',
+        'localeSessionRedirect',
+        'localizationRedirect',
+        'localeViewPath'
+    ]
+], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(), 
-        'middleware' => [
-            'web', 
-            'localeSessionRedirect', 
-            'localizationRedirect', 
-            'localeViewPath'
-        ]
-    ],
-    function () {
+    Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
+    Route::get('/fetch/progress/{session}', [FetchController::class, 'progress'])->name('fetch.progress');
+    Route::get('/fetch/status/{session}', [FetchController::class, 'status'])->name('fetch.status');
 
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-        Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
-
-        // Fetch routes
-        Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
-        Route::get('/fetch/progress/{session}', [FetchController::class, 'progress'])->name('fetch.progress');
-        Route::get('/fetch/status/{session}', [FetchController::class, 'status'])->name('fetch.status');
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 });
-
