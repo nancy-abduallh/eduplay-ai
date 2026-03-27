@@ -15,6 +15,7 @@ Route::get('locale/{locale}', function ($locale) {
 })->name('locale.set');
 
 Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
