@@ -37,3 +37,10 @@ Route::group([
     Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
     Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 });
+
+
+Route::get('/debug-routes', function () {
+    $routes = Route::getRoutes();
+    $uris = collect($routes->getRoutes())->map(fn($r) => $r->uri());
+    return response()->json($uris);
+});
