@@ -15,7 +15,7 @@ Route::get('locale/{locale}', function ($locale) {
 })->name('locale.set');
 
 Route::group([
-    'middleware' => ['localize', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
