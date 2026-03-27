@@ -1,0 +1,15 @@
+<?php
+
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FetchController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
+Route::get('/fetch/progress/{session}', [FetchController::class, 'progress'])->name('fetch.progress');
+Route::get('/fetch/status/{session}', [FetchController::class, 'status'])->name('fetch.status');
+
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
