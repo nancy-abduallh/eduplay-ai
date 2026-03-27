@@ -12,8 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
-        $middleware->web(prepend: [
-            \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        $middleware->web(append: [
             \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         ]);
 
