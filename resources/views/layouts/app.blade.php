@@ -448,7 +448,7 @@
                             <li><a class="dropdown-item"
                                     href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a></li>
                             <li><a class="dropdown-item"
-                                    href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">العربية</a></li>
+                                    href="{{ LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -519,7 +519,7 @@
                     <div class="d-flex gap-2">
                         <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"
                             class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">EN</a>
-                        <a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}"
+                        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"
                             class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">AR</a>
                     </div>
                 </div>
