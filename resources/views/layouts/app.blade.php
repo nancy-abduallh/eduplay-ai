@@ -445,8 +445,10 @@
                             <i class="fas fa-globe"></i> {{ strtoupper(app()->getLocale()) }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
-                            <li><a class="dropdown-item" href="{{ route('home') }}">English</a></li>
-                            <li><a class="dropdown-item" href="{{ route('home.ar') }}">العربية</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -515,8 +517,10 @@
                         <i class="fas fa-globe"></i> {{ __('messages.language') ?? 'Language' }}
                     </span>
                     <div class="d-flex gap-2">
-                        <a href="{{ route('home') }}" class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">EN</a>
-                        <a href="{{ route('home.ar') }}" class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">AR</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"
+                            class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">EN</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"
+                            class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">AR</a>
                     </div>
                 </div>
             </li>
