@@ -4,6 +4,6 @@
     "builder": "RAILPACK"
   },
   "deploy": {
-    "startCommand": "php artisan migrate --force && php artisan config:cache && php artisan view:cache && php -S 0.0.0.0:$PORT -t public ../router.php"
+    "startCommand": "php artisan migrate --force && php artisan config:cache && php artisan view:cache && php -S 0.0.0.0:$PORT -t public router.php"
   }
 }
