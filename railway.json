@@ -1,0 +1,9 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "RAILPACK"
+  },
+  "deploy": {
+    "startCommand": "php artisan migrate --force && php artisan config:cache && php artisan view:cache && php -S 0.0.0.0:$PORT -t public public/index.php"
+  }
+}
