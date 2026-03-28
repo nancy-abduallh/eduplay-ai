@@ -11,7 +11,7 @@ EduPlayAI is a Laravel-based platform that leverages **Gemini** and **YouTube Da
 
 ## ✨ Features
 
-- **AI‑Powered Playlist Generation** – Uses OpenAI to parse user input and fetch relevant YouTube playlists.
+- **AI‑Powered Playlist Generation** – Uses Gemini to parse user input and fetch relevant YouTube playlists.
 - **Real‑Time Progress** – Live progress bar and status updates during playlist generation.
 - **Dark / Light Mode** – Persistent theme toggle with smooth transitions.
 - **Mobile‑Friendly Sidebar** – Slide‑out navigation with animated arrows and footer.
