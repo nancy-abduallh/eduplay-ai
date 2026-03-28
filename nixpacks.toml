@@ -12,10 +12,3 @@ nixPkgs = [
 
 [phases.build]
 cmds = ["composer install --no-dev --optimize-autoloader"]
-
-[phases.deploy]
-cmds = [
-    "php artisan migrate --force",
-    "php artisan config:cache",
-    "php artisan view:cache"
-]
