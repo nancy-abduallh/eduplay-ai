@@ -10,5 +10,11 @@ nixPkgs = [
     "php82Extensions.tokenizer"
 ]
 
+[phases.install]
+cmds = [
+    "composer install --ignore-platform-reqs --no-scripts",
+    "npm i"
+]
+
 [phases.build]
 cmds = ["composer install --no-dev --optimize-autoloader --no-scripts"]
