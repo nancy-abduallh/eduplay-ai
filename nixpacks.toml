@@ -7,7 +7,8 @@ nixPkgs = [
     "php82Extensions.mbstring",
     "php82Extensions.xml",
     "php82Extensions.curl",
-    "php82Extensions.tokenizer"
+    "php82Extensions.tokenizer",
+    "nodejs"                   
 ]
 
 [phases.install]
