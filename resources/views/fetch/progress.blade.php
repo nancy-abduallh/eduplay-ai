@@ -105,10 +105,10 @@
                             '<div style="width:80px;height:80px;margin:0 auto;background:rgba(34,197,94,0.12);border:2px solid rgba(34,197,94,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#22C55E;"><i class="fas fa-check"></i></div>';
                         document.getElementById('progTitle').textContent = '{{ __('messages.fetch_complete') }}';
                         
-                        // Use the raw translation string and replace the placeholder
-                        let translation = '{{ __('messages.found_playlists', ['found' => 'PLACEHOLDER']) }}';
-                        // Replace the placeholder with the actual number, preserving any HTML tags
-                        const completionMessage = translation.replace('PLACEHOLDER', data.found);
+                        // Get the message with HTML from language file and replace the placeholder
+                        let completionMessage = '{{ __('messages.found_playlists', ['found' => 'PLACEHOLDER']) }}';
+                        completionMessage = completionMessage.replace('PLACEHOLDER', data.found);
+                        // Use innerHTML to render HTML tags properly
                         document.getElementById('progSub').innerHTML = completionMessage;
 
                         document.getElementById('doneBanner').classList.add('show');
