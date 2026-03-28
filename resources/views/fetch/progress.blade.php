@@ -13,11 +13,11 @@
 
             <h2 class="prog-title" id="progTitle">{{ __('messages.fetching_courses') }}</h2>
             <p class="prog-sub" id="progSub">
-                {!! sprintf(
-                    __('messages.processing_categories'),
-                    '<strong id="processedCount">0</strong>',
-                    '<strong>' . e($session->total_categories) . '</strong>',
-                ) !!}
+                {{ __('messages.processing_categories_start') }}
+                <strong id="processedCount">0</strong>
+                {{ __('messages.processing_categories_middle') }}
+                <strong>{{ $session->total_categories }}</strong>
+                {{ __('messages.processing_categories_end') }}
             </p>
 
             <div class="prog-bar-bg">
@@ -104,11 +104,10 @@
                         document.getElementById('spinnerWrap').innerHTML =
                             '<div style="width:80px;height:80px;margin:0 auto;background:rgba(34,197,94,0.12);border:2px solid rgba(34,197,94,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#22C55E;"><i class="fas fa-check"></i></div>';
                         document.getElementById('progTitle').textContent = '{{ __('messages.fetch_complete') }}';
-
-                        // Correct way: Use a placeholder and replace it with the actual number
-                        const message = '{{ __('messages.found_playlists', ['found' => 'PLACEHOLDER']) }}'.replace(
-                            'PLACEHOLDER', data.found);
-                        document.getElementById('progSub').innerHTML = message;
+                        
+                        // Update the subtitle with a clean message without HTML tags
+                        const completionMessage = '{{ __('messages.found_playlists', ['found' => 'PLACEHOLDER']) }}'.replace('PLACEHOLDER', data.found);
+                        document.getElementById('progSub').innerHTML = completionMessage;
 
                         document.getElementById('doneBanner').classList.add('show');
                         for (let i = 0; i < totalCats; i++) {
