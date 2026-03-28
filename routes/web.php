@@ -14,7 +14,14 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->to(LaravelLocalization::getLocalizedURL($locale, null, [], true));
 })->name('locale.set');
 
-LaravelLocalization::routes(function () {
+Route::group([
+    'middleware' => [
+        'localize',
+        'localeSessionRedirect',
+        'localizationRedirect',
+        'localeViewPath',
+    ],
+], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
     Route::get('/fetch/progress/{session}', [FetchController::class, 'progress'])->name('fetch.progress');
