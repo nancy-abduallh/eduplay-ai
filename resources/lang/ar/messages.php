@@ -70,4 +70,7 @@ return [
     'fetch_complete' => 'اكتمل البحث!',
     'found_playlists' => 'تم العثور على <strong>:found</strong> قائمة تشغيل فريدة عبر جميع الفئات.',
     'language' => 'اللغة',
+    'processing_categories_start' => 'جاري معالجة التصنيف',
+    'processing_categories_middle' => 'من',
+    'processing_categories_end' => '...',
 ];
