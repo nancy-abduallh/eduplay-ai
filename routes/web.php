@@ -14,8 +14,10 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->to(LaravelLocalization::getLocalizedURL($locale, null, [], true));
 })->name('locale.set');
 
+$prefix = request()->segment(1) === 'ar' ? 'ar' : '';
+
 Route::group([
-    'prefix'     => LaravelLocalization::setLocale(),
+    'prefix'     => $prefix,
     'middleware' => [
         'localize',
         'localeSessionRedirect',
