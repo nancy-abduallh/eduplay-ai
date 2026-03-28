@@ -6,10 +6,26 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+Route::get('language/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+    
+    session()->forget('locale');
+    
+    app()->setLocale($locale);
+    session(['locale' => $locale]);
+    
+    if ($locale === 'en') {
+        return redirect('/');
+    }
+    
+    return redirect("/{$locale}");
+})->name('language.switch');
 
 Route::group([
     'prefix'     => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+    'middleware' => ['localize', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
