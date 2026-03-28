@@ -14,15 +14,10 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->to(LaravelLocalization::getLocalizedURL($locale, null, [], true));
 })->name('locale.set');
 
-// Use the package's built-in localization group
+// Use the package's recommended route group
 Route::group([
-    'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [
-        'localeSessionRedirect',
-        'localizationRedirect',
-        'localeViewPath',
-        'localize',
-    ],
+    'prefix'     => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/fetch/start', [FetchController::class, 'start'])->name('fetch.start');
