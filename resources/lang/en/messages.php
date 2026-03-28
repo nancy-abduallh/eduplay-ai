@@ -71,4 +71,7 @@ return [
     'fetch_complete' => 'Fetch Complete!',
     'found_playlists' => 'Found <strong>:found</strong> unique playlists across all categories.',
     'language' => 'Language',
+    'processing_categories_start' => 'Processing category',
+    'processing_categories_middle' => 'of',
+    'processing_categories_end' => 'categories...',
 ];
