@@ -20,7 +20,7 @@
 $current = $paginator->currentPage();
 $last = $paginator->lastPage();
 
-$window = 5;
+$window = 3;
 $half = floor($window / 2);
 
 $start = $current - $half;
