@@ -785,45 +785,69 @@ body::before {
 }
 .empty-sub { font-size:0.88rem; color:var(--gray-2); max-width:340px; margin:0 auto 1.5rem; }
 
-/* ── PAGINATION (Custom) ─────────────────────────────── */
+/* ── PAGINATION (Custom Responsive) ─────────────────────────────── */
+
 .pagination-wrapper {
     margin-top: 50px;
     display: flex;
     justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+/* hide scrollbar but keep scrolling */
+.pagination-wrapper::-webkit-scrollbar {
+    display: none;
+}
+.pagination-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .pagination-wrapper .pagination {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+
+    padding: 10px 12px;
     border-radius: 14px;
+
     background: var(--bg-2);
     border: 1px solid var(--border);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+
     margin: 0;
+    width: max-content;
 }
 
 .pagination-wrapper .page-item {
     list-style: none;
+    flex: 0 0 auto;
 }
 
 .pagination-wrapper .page-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 36px;
-    height: 36px;
+
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
 
     background: var(--bg-card) !important;
     border: 1px solid var(--border) !important;
     color: var(--gray-2) !important;
+
     font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
 
     border-radius: 10px !important;
-    transition: all 0.25s ease;
     text-decoration: none;
+
+    transition: all 0.25s ease;
 }
 
 .pagination-wrapper .page-link:hover {
@@ -837,13 +861,40 @@ body::before {
     background: var(--grad) !important;
     color: #fff !important;
     border: none !important;
-    box-shadow: 0 4px 14px rgba(196, 28, 28, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 4px 14px rgba(196,28,28,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .pagination-wrapper .page-item.disabled .page-link {
     opacity: 0.35;
     pointer-events: none;
 }
+
+
+/* ── Mobile Optimization ─────────────────────────────── */
+
+@media (max-width: 576px) {
+
+    .pagination-wrapper {
+        justify-content: flex-start;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .pagination-wrapper .pagination {
+        gap: 4px;
+        padding: 8px 10px;
+    }
+
+    .pagination-wrapper .page-link {
+        min-width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+        padding: 0 8px;
+    }
+
+    }
 /* ── FOOTER ─────────────────────────────── */
 footer {
     background:var(--bg-2);
