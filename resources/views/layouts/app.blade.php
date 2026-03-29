@@ -515,8 +515,8 @@
                         <i class="fas fa-globe"></i> {{ __('messages.language') ?? 'Language' }}
                     </span>
                     <div class="d-flex gap-2">
-                        <a href="{{ route('language.switch', 'en') }}" class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">EN</a>
-                        <a href="{{ route('language.switch', 'ar') }}" class="btn btn-sm btn-outline-light" style="font-size:0.7rem;">AR</a>
+                        <a href="{{ route('language.switch', 'en') }}" class="btn btn-sm btn-outline-dark" style="font-size:0.7rem;">EN</a>
+                        <a href="{{ route('language.switch', 'ar') }}" class="btn btn-sm btn-outline-dark" style="font-size:0.7rem;">AR</a>
                     </div>
                 </div>
             </li>
